@@ -1,4 +1,4 @@
-﻿
+
 # Récupération d'informations sur un poste compromis/
 # Windows vers Windows/Linux
 # ATTENTION il est impératif de lancer une écoute Netcat sur un autre poste du même réseau : nc.exe -L -p 4444
@@ -6,6 +6,9 @@
 #      -p : précise le port d'écoute du server
 
 # ----- Récupération Variables ----- #
+
+# Encodage Français
+[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding(437) 
 
 $path = Read-Host "Chemin absolue vers les outils Unix : "
 $ipServ = Read-Host "Entrez l'adresse ip du serveur Netcat : "
@@ -34,7 +37,7 @@ $ipconfig = (ipconfig /all) | Out-String
 
 ## -- Récupération connexions -- ##
 $netstat = (netstat) | Out-String
-(echo "########## Connexions ##########" $netstat | .\nc.exe $ipsServ $portServ -w $timer)
+(echo "########## Connexions ##########" $netstat | .\nc.exe $ipServ $portServ -w $timer)
 
 ## -- Récupération Historique de connexions -- ##
 $netstatPlus = (netstat -abn) | Out-String
