@@ -1,3 +1,4 @@
+
 # Récupération d'informations sur un poste compromis/
 # Windows vers Windows/Linux
 # ATTENTION il est impératif de lancer une écoute Netcat sur un autre poste du même réseau : nc.exe -L -p 4444
@@ -35,6 +36,7 @@ catch {
         exit
     }
 
+## -- Check si nc.exe est dans le bon chemin -- ##
 if( [System.IO.File]::Exists($path+"\nc.exe"))
 {
      Write-Host "[+] nc.exe"
@@ -45,7 +47,7 @@ else{
         exit
 }
 
- Write-Host "[+] Début du script"
+Write-Host "[+] Début du script"
 
 ## -- Date et nom du poste -- ##
 $hostname = (hostname) | Out-String
@@ -123,4 +125,86 @@ $firewallProfiles = (netsh advfirewall show allprofiles) | % { $_ -replace “%s
 (echo "########## Firewall Profiles ##########" $firewallProfiles | .\nc.exe $ipServ $portServ -w $timer)
 Write-Host "[+] Récupération des profils Firewall"
 
-## -- EventsLogs -- ##
+########## -- EventsLogs -- ##########
+# Suite aux recommandations ANSSI
+Write-Host "EventLogs ..."
+(echo "########## EventLogs ##########"| .\nc.exe $ipServ $portServ -w $timer)
+
+## -- Application Whitelisting -- ##
+
+# AppLocker Block
+$Error.Clear() #clear error before each eventlogs
+
+$AppBlock = Get-EventLog Application -Source .\AppLocker -InstanceId 8003,8004 -EntryType Error,Warning
+
+if(!$Error){
+    (echo "# AppLocker Block" $AppBlock | .\nc.exe $ipServ $portServ -w $timer)
+}else{
+    Write-Host "[-] AppLocker Block"
+}
+
+# Applocker Warning
+$Error.Clear()
+$AppWarning = Get-EventLog Application -Source .\AppLocker -InstanceId 8006,8007 -EntryType Error,Warning
+if(!$Error){
+    (echo "# AppLocker Warning" $AppWarning | .\nc.exe $ipServ $portServ -w $timer)
+}else{
+    Write-Host "[-] AppLocker Warning"
+}
+
+# SRP Block
+$Error.Clear()
+$srpBlock = Get-EventLog -LogName Application -EntryType Warning -InstanceId 865,866,867,868,882 
+if(!$Error){
+    (echo "# SRP Block" $srpBlock | .\nc.exe $ipServ $portServ -w $timer)
+}else{
+    Write-Host "[-] SRP Block"
+}
+
+## -- Application crashes -- ##
+
+# App Error
+$Error.Clear()
+$appError = Get-EventLog -LogName Application -EntryType Error -InstanceId 1000
+if(!$Error){
+    (echo "# Application Error" $appError | .\nc.exe $ipServ $portServ -w $timer)
+}else{
+    Write-Host "[-] Application Error"
+}
+
+# App hang
+$Error.Clear()
+$appHang = Get-EventLog -LogName Application -EntryType Error -InstanceId 1002
+if(!$Error){
+    (echo "# Application Hang" $appHang | .\nc.exe $ipServ $portServ -w $timer)
+}else{
+    Write-Host "[-] Application Hang"
+}
+
+# WER
+$Error.Clear()
+$wer = Get-EventLog -LogName Application -EntryType Information -InstanceId 1001
+if(!$Error){
+    (echo "# WER" $wer | .\nc.exe $ipServ $portServ -w $timer)
+}else{
+    Write-Host "[-] WER"
+}
+
+# EMET
+$Error.Clear()
+$emet = Get-EventLog -LogName Application -EntryType Warning,Error -InstanceId 1,2
+if(!$Error){
+    (echo "# EMET" $emet | .\nc.exe $ipServ $portServ -w $timer)
+}else{
+    Write-Host "[-] EMET"
+}
+
+# BSOD
+$Error.Clear()
+$bsod = Get-EventLog -LogName System -EntryType Error -InstanceId 1001
+if(!$Error){
+    (echo "# BSOD" $bsod | .\nc.exe $ipServ $portServ -w $timer)
+}else{
+    Write-Host "[-] BSOD"
+}
+
