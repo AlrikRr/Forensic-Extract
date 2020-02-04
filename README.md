@@ -15,6 +15,7 @@ Extract:
 - ps list
 - services list
 - open files
+- mounted disk
 - routes
 - crontab
 - drivers
