@@ -22,3 +22,4 @@ Extract:
 - shared disk
 - cmd history
 - firewall profiles
+- EventLogs (based on ANSSI recommendation)
