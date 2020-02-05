@@ -25,8 +25,12 @@ $ErrorActionPreference= 'silentlycontinue' #don't display errors
 $path = Read-Host "Chemin absolu vers le programme nc.exe [C:\users\toto\Tools] : "
 $ipServ = Read-Host "Entrez l'adresse IP du serveur Netcat : "
 $portServ = Read-host "Entrez le port d'écoute du serveur Netcat [Défaut:4444] : "
-$timer = Read-host "Entrer le nombre de secondes entre chaque envoie au serveur Netcat : [Défaut:2]"
-
+Write-Host "Option pour Scheduled Task, veuillez saisir une range de date pour y récupérer toutes les tâches effectuées (Attention, cela peut augmenter considérablement la taille du rapport ! )"
+Write-Host " Exemple : Récupérer les tâche du 05/02/2020(début) au 07/02/2020(fin)"
+$datenow = Read-host "Date de début [jj/mm/yyyy]:"
+$dateend = Read-host "Date de fin [jj/mm/yyyy]:"
+#$timer = Read-host "Entrer le nombre de secondes entre chaque envoie au serveur Netcat : [Défaut:2]"
+$timer = 3
 
 #################### #################### ----- Début du script ----- #################### #################### 
 
@@ -702,11 +706,11 @@ if(!$Error){
 ####################  -- Scheduled task -- #################### 
 Write-Host "Scheduled task ..."
 (echo "# Scheduled task #"| .\nc.exe $ipServ $portServ -w $timer)
-$datenow=Get-Date -Format "dd/MM/yyyy"
+#$datenow=Get-Date -Format "dd/MM/yyyy"
 
 # Démarrage de la tâche
 $Error.Clear()
-$STstartTask=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-TaskScheduler/Operational"; ID="100"; StartTime=$datenow}
+$STstartTask=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-TaskScheduler/Operational"; ID="100"; StartTime=$datenow;EndTime=$dateend}
 if(!$Error){
     (echo "#Démarrage de la tâche " $STstartTask | .\nc.exe $ipServ $portServ -w $timer)
     Write-Host "[+]  Démarrage de la tâche "
@@ -726,7 +730,7 @@ if(!$Error){
 
 # Lancement de la tâche 
 $Error.Clear()
-$STlaunchTask=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-TaskScheduler/Operational"; ID="107","108","109","110","129"; StartTime=$datenow}
+$STlaunchTask=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-TaskScheduler/Operational"; ID="107","108","109","110","129"; StartTime=$datenow;EndTime=$dateend}
 if(!$Error){
     (echo "#Lancement de la tâche " $STlaunchTask | .\nc.exe $ipServ $portServ -w $timer)
     Write-Host "[+]  Lancement de la tâche "
@@ -736,7 +740,7 @@ if(!$Error){
 
 # Fin de la tâche
 $Error.Clear()
-$STendTask=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-TaskScheduler/Operational"; ID="102"; StartTime=$datenow}
+$STendTask=Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-TaskScheduler/Operational"; ID="102"; StartTime=$datenow;EndTime=$dateend}
 if(!$Error){
     (echo "#Fin de la tâche " $STendTask | .\nc.exe $ipServ $portServ -w $timer)
     Write-Host "[+]  Fin de la tâche "
