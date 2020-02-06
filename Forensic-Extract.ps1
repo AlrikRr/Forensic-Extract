@@ -8,7 +8,7 @@
 # ----- Récupération Variables ----- #
 
 # Encodage Français
-[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding(437) 
+#[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding(437) 
 
 Write-Host "
   ______                       _             ______      _                  _   
