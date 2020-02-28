@@ -24,6 +24,6 @@ Extract:
 - firewall profiles
 - EventLogs (based on ANSSI recommendation)
 
-## Forsensic-Extract.ps1
+## Forsensic-Extractv2.ps1
 
 Improved version, runs locally without netcat
