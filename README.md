@@ -1,4 +1,4 @@
-# Forensic-Extract V2.0 (Très prochainement !! )
+# Forensic-Extract V2.0
 
 Forensic-Extract est un script PowerShell permettant avec un compte administrateur de récupérer différents logs / information sur un poste compromis.  
 
