@@ -34,10 +34,4 @@ Si une commandes de récupération d'un fichier logs ne fonctionne pas, une erre
 
 
 ## **Les indicateurs**
-
-\[!] : Message d'information
-
-\[+] : Message de succès
-
-\[-] : Message d'erreurs
-
+![legende.png](legende.png)
