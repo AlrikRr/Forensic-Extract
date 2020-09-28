@@ -20,7 +20,7 @@ Forensic-Extract est un script PowerShell permettant avec un compte administrate
 - Résupération des information du poste au format `.txt`
 - Résultat final archivé au format `.zip`
 
-## Comment-ça marche ?
+## **Comment-ça marche ?**
 
 L'utilisation est très simple, il suffit d'éxecuter le script avec un compte Administrateur.  
 Le script va démarrer ses premières vérifications et vous demander où sauvegarder les logs.  
@@ -32,6 +32,41 @@ En cas d'erreur importante (Mauvais Chemin, Pas assez de droits pour le compte, 
 
 Si une commandes de récupération d'un fichier logs ne fonctionne pas, une erreur va apparaître mais le script ne va pas s'arrêter.  
 
+## **Ce qui est récupéré** :
 
-## **Les indicateurs**
+### Journaux Microsoft
+-  Application 
+- Security
+- Microsoft-Windows-AppLocker/EXE and DLL
+- Microsoft-Windows-AppLocker/MSI and Script
+- System
+- Microsoft-Windows-WindowsUpdateClient/Operational
+- Setup
+- Microsoft-Windows-WindowsFirewall With Advanced Security/Firewall
+- Microsoft-Windows-Application-Experience/Program-Inventory
+- Microsoft-Windows-CodeIntegrity/Operational
+- Microsoft-Windows-WindowsDefender/Operational
+- Microsoft-Windows-TerminalServices-LocalSessionManager/Operational
+- Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational
+- Microsoft-Windows-TaskScheduler/Operational
+- Windows PowerShell
+- Microsoft-Windows-PowerShell/Operational
+
+### Informations du poste
+- Nom du poste 
+- la date
+- les interfaces réseaux
+- les ports de connexion 
+- les processus associées aux ports de connexion
+- la liste des processus en exécutions 
+- les services en exécutions 
+- les routes
+- la liste des volumes montés
+- les tâches programmées 
+- les volumes samba
+- historique des commandes
+- les drivers 
+
+
+## **La légende**
 ![legende.png](legende.png)
