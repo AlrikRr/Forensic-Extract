@@ -1,17 +1,23 @@
 # Forensic-Extract V2.0
 
+<a href="https://github.com/AlrikRr/Forensic-Extract/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/AlrikRr/Forensic-Extract"></a>
+<a href="https://github.com/AlrikRr/Forensic-Extract/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/AlrikRr/Forensic-Extract"></a>
+<a href="https://github.com/AlrikRr/Forensic-Extract/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/AlrikRr/Forensic-Extract"></a>
+<a href="https://github.com/AlrikRr/Forensic-Extract/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/AlrikRr/Forensic-Extract"></a>
+
+
 ![Capture.PNG](Capture.PNG)
 
 
 Forensic-Extract est un script PowerShell permettant avec un compte administrateur de récupérer différents logs / information sur un poste compromis.  
 
-**Pré-Requis** :
+## :clipboard: **Pré-Requis** :
 - Compte Administrateur
 - PowerShell version 5
 - Un endroit où stocker les données (USB, Disque partagé, etc.)
 
 
-**Fonctionnalités** :
+## :fire: **Fonctionnalités** :
 - Test de vérification si le compte est bien administrateur
 - Vérification de la version PowerShell installé
 - Saisie Utilisateur du lieu où stocker les logs
@@ -20,7 +26,7 @@ Forensic-Extract est un script PowerShell permettant avec un compte administrate
 - Résupération des information du poste au format `.txt`
 - Résultat final archivé au format `.zip`
 
-## **Comment-ça marche ?**
+##  :question: **Comment-ça marche ?**
 
 L'utilisation est très simple, il suffit d'éxecuter le script avec un compte Administrateur.  
 Le script va démarrer ses premières vérifications et vous demander où sauvegarder les logs.  
@@ -32,7 +38,7 @@ En cas d'erreur importante (Mauvais Chemin, Pas assez de droits pour le compte, 
 
 Si une commandes de récupération d'un fichier logs ne fonctionne pas, une erreur va apparaître mais le script ne va pas s'arrêter.  
 
-## **Ce qui est récupéré** :
+##  :floppy_disk: **Ce qui est récupéré** :
 
 ### Journaux Microsoft
 -  Application 
@@ -68,5 +74,5 @@ Si une commandes de récupération d'un fichier logs ne fonctionne pas, une erre
 - les drivers 
 
 
-## **La légende**
+##  :frowning: **La légende**
 ![legende.png](legende.png)
