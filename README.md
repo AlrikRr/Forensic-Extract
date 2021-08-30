@@ -8,40 +8,40 @@
 
 ![Capture.PNG](Capture.PNG)
 
+Forensic-Extract is a PowerShell script that allows you to retrieve windows logs and much information about a compromise computer.
 
-Forensic-Extract est un script PowerShell permettant avec un compte administrateur de récupérer différents logs / information sur un poste compromis.  
-
-## :clipboard: **Pré-Requis** :
-- Compte Administrateur
+## :clipboard: **Prerequisite** :
+- Admin rights
 - PowerShell version 5
-- Un endroit où stocker les données (USB, Disque partagé, etc.)
+- A place to store data (USB, shared drive, etc.)
 
 
-## :fire: **Fonctionnalités** :
-- Test de vérification si le compte est bien administrateur
-- Vérification de la version PowerShell installé
-- Saisie Utilisateur du lieu où stocker les logs
-- Création d'un dossier avec le nom du poste et la date actuelle.
-- Récupération de journaux au format `evtx`
-- Résupération des information du poste au format `.txt`
-- Résultat final archivé au format `.zip`
+## :fire: **Features** :
+- Check if the account is an administrator
+- Verification of the PowerShell version installed
+- User input of the location where to store the logs
+- Creation of a folder with the name of the station and the current date.
+- Retrieve Windows logs in `evtx` format
+- Retrieve information from the workstation in `.txt` format
+- Final result archived in `.zip` format
 
-##  :question: **Comment-ça marche ?**
+##  :question: **How it works ?**
 
-L'utilisation est très simple, il suffit d'éxecuter le script avec un compte Administrateur.  
-Le script va démarrer ses premières vérifications et vous demander où sauvegarder les logs.  
+The usage is very simple, you just need to run the script with an **Administrator account**.  
+The script will start its first checks and **ask you where to save the logs**.  
 
-Si le chemin saisie par l'utiisateur existe, un dossier nommé avec le nom du poste et la date va être créer.  
-Ce dossier va contenir les logs et va être ensuite compressé en archive `.zip`.  
+If the path entered by the user exists, a folder named with the name of the computer and the date will be created.  
+This folder will store the logs and will then be **compressed into a `.zip` archive**.  
 
-En cas d'erreur importante (Mauvais Chemin, Pas assez de droits pour le compte, etc.) le script va s'arrêter.
+In case of an **important error** (Wrong Path, Not enough rights for the account, etc.) **the script will terminate**.  
 
-Si une commandes de récupération d'un fichier logs ne fonctionne pas, une erreur va apparaître mais le script ne va pas s'arrêter.  
+If a command to retrieve a log file doesn't work, an error will be displayed but the script won't stop.  
 
-##  :floppy_disk: **Ce qui est récupéré** :
 
-### Journaux Microsoft
--  Application 
+##  :floppy_disk: **Retrive data** :
+
+### Microsoft Events
+- Application 
 - Security
 - Microsoft-Windows-AppLocker/EXE and DLL
 - Microsoft-Windows-AppLocker/MSI and Script
@@ -58,21 +58,25 @@ Si une commandes de récupération d'un fichier logs ne fonctionne pas, une erre
 - Windows PowerShell
 - Microsoft-Windows-PowerShell/Operational
 
-### Informations du poste
-- Nom du poste 
-- la date
-- les interfaces réseaux
-- les ports de connexion 
-- les processus associées aux ports de connexion
-- la liste des processus en exécutions 
-- les services en exécutions 
-- les routes
-- la liste des volumes montés
-- les tâches programmées 
-- les volumes samba
-- historique des commandes
-- les drivers 
+### Computer information
+- Computer name 
+- Current date
+- Network interfaces
+- Port status 
+- Processus name associated with open port
+- Processus name currently in use 
+- Services currently in use
+- Network routing
+- Mounted device
+- Cron jobs 
+- SAMBA shares
+- Doskey history
+- Drivers
 
 
-##  :frowning: **La légende**
+##  :frowning: **Legend**
 ![legende.png](legende.png)
+
+- Information warning
+- Success warning
+- Failure warning
